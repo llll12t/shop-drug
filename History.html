@@ -48,20 +48,16 @@
 </head>
 
 <body class="bg-slate-50 min-h-screen">
- <!-- Loading Screen แสดงก่อนเนื้อหาหลัก -->
-    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-[#F5F8FD] z-50">
-        <div class="text-center">
-            <div class="relative flex w-64 animate-pulse gap-2 p-4">
-                <div class="h-12 w-12 rounded-full bg-slate-400"></div>
-                <div class="flex-1">
-                    <div class="mb-1 h-5 w-3/5 rounded-lg bg-slate-400 text-lg"></div>
-                    <div class="h-5 w-[90%] rounded-lg bg-slate-400 text-sm"></div>
-                </div>
-                <div class="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div>
-            </div>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-[#F5F8FD] z-50">
+    <div class="text-center">
+      <div class="relative flex w-48">
+        <div class="flex-1">
+            <img src="https://lh5.googleusercontent.com/d/1MoIcHrUlOtTV46t5CI3bYwT0cGQBh7PB" alt="Flying Object" class="flying-image w-48 mx-auto">
         </div>
+      </div>
     </div>
-
+  </div>
     <div class="main-shop">
         <!-- Product Selection -->
         <div id="product-selection" class="max-w-md mx-auto pt-20">
@@ -90,12 +86,12 @@
 
             <!-- ตารางแสดงข้อมูลที่ดึงจาก Google Sheets -->
             <div class="max-w-md m-auto p-4">
-                <table id="data-table" class="min-w-full text-xs ">
+                <table id="data-table" class="min-w-full text-xs bg-white rounded-xl">
                     <thead>
                         <tr class="text-slate-800 text-sm mt-4">
-                            <th class="bg-white text-black px-4 py-2 text-left py-2 px-4 shadow-sm border-b rounded-tl-xl">เวลาสั่งซื้อ</th>
-                            <th class="bg-white text-black px-4 py-2 text-left shadow-sm border-b">ราคา</th>
-                            <th class="bg-white text-black px-4 py-2 text-left shadow-sm border-b"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            <th class="py-2 px-4 shadow">เวลาสั่งซื้อ</th>
+                            <th class="py-2 px-4 shadow">ราคา</th>
+                            <th class="py-2 px-4 shadow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                     width="20" height="20" color="#000000" fill="none">
                                     <path
                                         d="M20.016 2C18.9026 2 18 4.68629 18 8H20.016C20.9876 8 21.4734 8 21.7741 7.66455C22.0749 7.32909 22.0225 6.88733 21.9178 6.00381C21.6414 3.67143 20.8943 2 20.016 2Z"
@@ -112,7 +108,7 @@
                                         d="M12.5 10.875C11.6716 10.875 11 11.4626 11 12.1875C11 12.9124 11.6716 13.5 12.5 13.5C13.3284 13.5 14 14.0876 14 14.8125C14 15.5374 13.3284 16.125 12.5 16.125M12.5 10.875C13.1531 10.875 13.7087 11.2402 13.9146 11.75M12.5 10.875V10M12.5 16.125C11.8469 16.125 11.2913 15.7598 11.0854 15.25M12.5 16.125V17"
                                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                                 </svg></th> <!-- เพิ่มคอลัมน์การชำระเงิน -->
-                            <th class="bg-white text-black px-4 py-2 text-left shadow-sm border-b rounded-tr-xl">บิล</th>
+                            <th class="py-2 px-4 shadow">บิล</th>
                         </tr>
                     </thead>
 
@@ -209,7 +205,7 @@
         function processOrders(data) {
             const orderMap = {};
             data.forEach(row => {
-                const [orderId, name,address, contact, note, userId, idProduct, product, price, size, value, total, rawTimestamp, paymentStatus] = row;
+                const [orderId, name,address, contact,citizenid, note, userId, idProduct, product, price, size, value, total, rawTimestamp, paymentStatus] = row;
                 const timestamp = new Date(rawTimestamp);
 
                 if (!orderMap[orderId]) {
@@ -219,6 +215,7 @@
                         name,
                         address,
                         contact,
+                        citizenid,
                         note,
                         total: +total,
                         timestamp,
@@ -333,7 +330,8 @@
                     <strong>ข้อมูลการสั่งซื้อ</strong>
                     <p><strong>Order ID:</strong> ${order.orderId}</p>
                     <p><strong>ชื่อผู้สั่ง:</strong> ${order.name}</p>
-                    <p><strong>เลขที่บัตรประชาชน:</strong> ${order.contact}</p>
+                    <p><strong>เบอร์ติดต่อ:</strong> ${order.contact}</p>
+                    <p><strong>เลขที่บัตรประชาชน:</strong> ${order.citizenid}</p>
                     <p><strong>ที่อยู่:</strong> ${order.address}</p>
                     <p><strong>หมายเหตุ:</strong> ${order.note}</p>
                 </div>
