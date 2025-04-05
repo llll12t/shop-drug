@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>แสดงข้อมูลการสั่งซื้อ</title>
+  <title>แสดงข้อมูล</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -124,14 +124,14 @@
         // [7]=productId, [8]=productName, [9]=price, [10]=size, [11]=quantity, [12]=itemTotal, [13]=timestamp,
         // [14]=paymentStatus, [15]=express, [16]=tax, [17]=send
         const orderId = row[0];
-        const totalOrder = parseFloat(row[11]) || 0;
-        const totalPrice = parseFloat(row[11]) || 0;
-        const rawTimestamp = row[12];
+        const totalOrder = parseFloat(row[12]) || 0;
+        const totalPrice = parseFloat(row[12]) || 0;
+        const rawTimestamp = row[13];
         const timestamp = new Date(rawTimestamp);
-        const paymentStatus = row[13] || '';
-        const express = row[14] || '';
-        const tax = row[15] || '';
-        const send = row[16] ? formatDate(row[16]) : '';
+        const paymentStatus = row[14] || '';
+        const express = row[15] || '';
+        const tax = row[16] || '';
+        const send = row[17] ? formatDate(row[17]) : '';
 
         if (!orderMap[orderId]) {
           orderMap[orderId] = {
@@ -139,8 +139,9 @@
             name: row[1],
             address: row[2],
             contact: row[3],
-            note: row[4],
-            userlineid: row[5],
+            citizenid: row[4], // เพิ่ม citizenid
+            note: row[5],
+            userlineid: row[6],
             totalOrder: totalOrder,
             totalPrice: totalPrice,
             timestamp: timestamp,
@@ -358,6 +359,7 @@
           <p><strong>ชื่อผู้สั่ง:</strong> ${order.name}</p>
           <p><strong>ที่อยู่:</strong> ${order.address}</p>
           <p><strong>เบอร์ติดต่อ:</strong> ${order.contact}</p>
+          <p><strong>เลขรหัสประชาชน:</strong> ${order.citizenid || '-'}</p>
           <p><strong>หมายเหตุ:</strong> ${order.note}</p>
         </div>
         <div style="margin-bottom: 10px; font-size:14px; text-align: start;">
