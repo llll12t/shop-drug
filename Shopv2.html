@@ -1306,7 +1306,7 @@
       confirmOrderBtn.disabled = true;
       confirmOrderBtn.textContent = 'กำลังบันทึก...';
       await saveOrder(currentOrder);
-      await sendTextMessage();
+     // await sendTextMessage();
       cart = [];
       updateCartCount();
       shippingInfo.classList.add('hidden');
