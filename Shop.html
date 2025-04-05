@@ -21,8 +21,9 @@
     <style>
         :root {
             --primary-color: #ffffff;
-            --secondary-color: #d14529;
-            --accent-color: #fdc9c9;
+            --secondary-color: #000000;
+            --accent-color: #209f84;
+            --white-color: #ffffff;
         }
 
         .swal2-styled.swal2-confirm {
@@ -125,7 +126,7 @@
                         </div>
                         <div class="flex items-center">
                             <button id="go-to-cart"
-                                class="bg-[var(--accent-color)] text-md py-2 px-4 flex items-center gap-2 rounded-xl ml-4 focus:outline-none">
+                                class="bg-[var(--accent-color)] text-[var(--primary-color)] text-md py-2 px-4 flex items-center gap-2 rounded-xl ml-4 focus:outline-none">
                                 <!-- ไอคอนตะกร้าสินค้า -->
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     fill="none" stroke="currentColor" stroke-width="1.5">
@@ -141,8 +142,7 @@
                 </div>
 
                 <!-- Slide Banner -->
-                <div id="banner-slider"
-                    class="swiper-container w-full max-h-[300px] relative overflow-hidden rounded-xl">
+                <div id="banner-slider" class="swiper-container w-full max-h-[300px] relative overflow-hidden rounded-xl pb-2">
                     <div class="swiper-wrapper">
                         <!-- สไลด์จะแทรกที่นี่ผ่าน JavaScript -->
                     </div>
@@ -342,7 +342,7 @@
 
         async function initializeApp() {
             showLoading(true);
-          await initializeLiff();
+            await initializeLiff();
             try {
                 const [productsData, shippingData, bannersData] = await Promise.all([
                     fetchProducts(),
@@ -488,7 +488,7 @@
                     img.src = banner.image_url;
                     img.alt = banner.alt_text || 'Banner';
                     img.loading = 'lazy';
-                    img.classList.add('w-full', 'h-auto', 'py-2', 'object-cover', 'rounded-xl');
+                    img.classList.add('w-full', 'h-auto',  'object-cover', 'rounded-xl');
                     link.appendChild(img);
                     slide.appendChild(link);
                 } else {
@@ -552,9 +552,9 @@
                 tabButton.classList.add('flex-shrink-0', 'px-1', 'py-1', 'pr-2', 'border', 'rounded-xl', 'focus:outline-none', 'flex', 'items-center', 'justify-start', 'space-x-2');
                 tabButton.setAttribute('data-category', category);
                 if (category === currentTab) {
-                    tabButton.classList.add('bg-blue-50', 'border-blue-800', 'text-[var(--secondary-color)]');
+                    tabButton.classList.add('bg-[var(--accent-color)]', 'border-[var(--primary-color)]', 'text-[var(--white-color)]');
                 } else {
-                    tabButton.classList.add('bg-[var(--primary-color)]', 'text-[var(--secondary-color)]');
+                    tabButton.classList.add('bg-[var(--primary-color)]', 'text-[var(--accent-color)]');
                 }
                 const categoryImage = document.createElement('img');
                 categoryImage.src = getCategoryImage(category, products);
@@ -563,7 +563,7 @@
                 categoryImage.classList.add('w-8', 'h-8', 'rounded-lg');
                 const categoryLabel = document.createElement('span');
                 categoryLabel.textContent = category === 'All' ? 'รวมทั้งหมด' : category;
-                categoryLabel.classList.add('text-sm');
+                categoryLabel.classList.add('text-sm','px-2');
                 tabButton.appendChild(categoryImage);
                 tabButton.appendChild(categoryLabel);
                 tabButton.addEventListener('click', function () {
@@ -578,12 +578,12 @@
 
         function getCategoryImage(category, products) {
             if (category === 'All') {
-                return 'https://lh5.googleusercontent.com/d/1EcQBRvMKn5oAhRM6yODkn0gWcMTWGGS6';
+                return 'https://img.icons8.com/?size=100&id=aEUiCprmQXz9&format=png&color=000000';
             }
             const product = products.find(function (p) {
                 return p.category === category;
             });
-            return product ? product['Img-product'] : 'https://lh5.googleusercontent.com/d/1EcQBRvMKn5oAhRM6yODkn0gWcMTWGGS6';
+            return product ? product['Img-product'] : 'https://img.icons8.com/?size=100&id=aEUiCprmQXz9&format=png&color=000000';
         }
 
         function switchTab(category) {
@@ -689,13 +689,13 @@
                 finalPrice = product.Discount;
             }
             const priceBadge = document.createElement('div');
-            priceBadge.classList.add('absolute', 'top-2', 'right-12', 'bg-[var(--secondary-color)]', 'text-white', 'px-2', 'py-1', 'rounded-l-xl', 'text-sm', 'font-semibold', 'z-10');
+            priceBadge.classList.add('absolute', 'top-2', 'right-12', 'bg-[var(--accent-color)]', 'text-[var(--white-color)]', 'px-2', 'py-1', 'rounded-l-xl', 'text-sm', 'font-semibold', 'z-10');
             priceBadge.textContent = `${finalPrice} บาท`;
             imgContainer.appendChild(priceBadge);
             productDiv.appendChild(imgContainer);
 
             const productInfoContainer = document.createElement('div');
-            productInfoContainer.classList.add('flex-grow', 'text-left', 'p-2', 'text-sm', 'mt-2');
+            productInfoContainer.classList.add('flex-grow', 'text-left', 'p-2', 'text-sm');
             const productName = document.createElement('h3');
             productName.classList.add('py-2', 'font-semibold', 'text-[var(--secondary-color)]');
             productName.textContent = product.name;
@@ -731,10 +731,10 @@
             // otherOption.textContent = 'ระบุเอง';
             // sizeSelect.appendChild(otherOption);
 
-            rowContainer.appendChild(sizeSelect);
+            rowContainer.appendChild(sizeSelect);  
 
             const addToCartBtn = document.createElement('button');
-            addToCartBtn.classList.add('bg-[var(--accent-color)]', 'p-2', 'rounded-xl', 'font-bold', 'focus:outline-none', 'focus:ring-2', 'add-to-cart');
+            addToCartBtn.classList.add('bg-[var(--accent-color)]', 'p-2','text-[var(--primary-color)]', 'rounded-xl', 'font-bold', 'focus:outline-none', 'focus:ring-2', 'add-to-cart');
             addToCartBtn.style.width = '35%';
             addToCartBtn.textContent = 'ซื้อ';
             addToCartBtn.setAttribute('data-id', product.id);
