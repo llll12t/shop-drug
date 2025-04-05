@@ -740,21 +740,36 @@
       const sizeSelect = document.createElement('select');
       sizeSelect.classList.add('bg-gray-200', 'text-[var(--secondary-color)]', 'rounded-xl', 'p-2', 'product-size');
       sizeSelect.setAttribute('data-id', product.id);
-      const defaultOption = document.createElement('option');
-      defaultOption.value = '';
-      defaultOption.disabled = true;
-      defaultOption.selected = true;
-      defaultOption.textContent = 'เลือกไซต์';
-      sizeSelect.appendChild(defaultOption);
 
-      ['FS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'].forEach(function (size) {
-        if (product[size] > 0) {
-          const option = document.createElement('option');
-          option.value = size;
-          option.textContent = size + ' (' + product[size] + ')';
-          sizeSelect.appendChild(option);
-        }
-      });
+      let firstOptionSelected = false;
+        ['กล่อง', 'แผง', 'ขวด'].forEach(function (size) {
+            if (product[size] > 0) {
+                const option = document.createElement('option');
+                option.value = size;
+                option.textContent = size + ' (' + product[size] + ')';
+                if (!firstOptionSelected) {
+                    option.selected = true;
+                    firstOptionSelected = true;
+                }
+                sizeSelect.appendChild(option);
+            }
+        });
+
+      // const defaultOption = document.createElement('option');
+      // defaultOption.value = '';
+      // defaultOption.disabled = true;
+      // defaultOption.selected = true;
+      // defaultOption.textContent = 'เลือกไซต์';
+      // sizeSelect.appendChild(defaultOption);
+
+      // ['FS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'].forEach(function (size) {
+      //   if (product[size] > 0) {
+      //     const option = document.createElement('option');
+      //     option.value = size;
+      //     option.textContent = size + ' (' + product[size] + ')';
+      //     sizeSelect.appendChild(option);
+      //   }
+      // });
 
       const otherOption = document.createElement('option');
       otherOption.value = 'Other';
