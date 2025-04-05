@@ -19,11 +19,12 @@
 
   <!-- กำหนดธีมสีใน :root (3 ค่าสี) -->
   <style>
-    :root {
-      --primary-color: #ffffff;
-      --secondary-color: #0A164D;
-      --accent-color: #EB8012;
-    }
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #000000;
+            --accent-color: #209f84;
+            --white-color: #ffffff;
+        }
 
     .swal2-styled.swal2-confirm {
       background-color: #0A164D !important;
@@ -127,17 +128,19 @@
 </head>
 
 <body class="bg-slate-200 font-sans">
-  <!-- Loading Screen -->
-  <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-[#F5F8FD] z-50">
-    <div class="text-center">
-      <div class="relative flex w-48">
-        <div class="flex-1">
-          <img src="https://lh5.googleusercontent.com/d/1MoIcHrUlOtTV46t5CI3bYwT0cGQBh7PB" alt="Flying Object"
-            class="flying-image w-48 mx-auto">
+    <!-- Loading Screen แสดงก่อนเนื้อหาหลัก -->
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-[#F5F8FD] z-50">
+        <div class="text-center">
+            <div class="relative flex w-64 animate-pulse gap-2 p-4">
+                <div class="h-12 w-12 rounded-full bg-slate-400"></div>
+                <div class="flex-1">
+                    <div class="mb-1 h-5 w-3/5 rounded-lg bg-slate-400 text-lg"></div>
+                    <div class="h-5 w-[90%] rounded-lg bg-slate-400 text-sm"></div>
+                </div>
+                <div class="absolute bottom-5 right-0 h-4 w-4 rounded-full bg-slate-400"></div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
   <!-- main-shop (ซ่อนไว้ก่อน แสดงเมื่อโหลดเสร็จ) -->
   <div class="main-shop hidden">
