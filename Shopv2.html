@@ -364,7 +364,7 @@
 
     async function initializeApp() {
       showLoading(true);
-      //await initializeLiff();
+      await initializeLiff();
       try {
         const [productsData, shippingData, bannersData] = await Promise.all([
           fetchProducts(),
