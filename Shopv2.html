@@ -69,12 +69,6 @@
       }
     }
 
-    .go-to-cart {
-      animation: go-to-cart 0.5s ease-in-out;
-      background-color: #D8FA00;
-      transform: scale(1.1);
-    }
-
     .swiper-button-prev-custom,
     .swiper-button-next-custom {
       position: absolute;
@@ -111,9 +105,7 @@
       overflow: hidden !important;
     }
 
-    button.swal2-confirm.swal2-styled {
-      display: none !important;
-    }
+
 
     .swal2-title {
       font-size: 1rem !important;
@@ -164,7 +156,7 @@
             </div>
             <div class="flex items-center">
               <button id="go-to-cart"
-                class="bg-[var(--accent-color)] text-md py-2 px-4 flex items-center gap-2 rounded-xl ml-4 focus:outline-none">
+                class="bg-[var(--accent-color)] text-[var(--white-color)] text-md py-2 px-4 flex items-center gap-2 rounded-xl ml-4 focus:outline-none">
                 <!-- ไอคอนตะกร้าสินค้า -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
                   stroke="currentColor" stroke-width="1.5">
@@ -278,7 +270,7 @@
             <!-- ฟิลด์เพิ่มข้อมูลเลขรหัสประชาชน -->
             <div class="mb-4">
               <label for="citizenid" class="block text-[var(--secondary-color)]">อีเมล</label>
-              <input type="email" id="citizenid" placeholder="อีเมล" class="block w-full mb-2 p-2 border rounded-xl focus:outline-none" required />
+              <input type="email" id="citizenid" placeholder="อีเมล" class="block w-full mb-2 p-2 border rounded-xl focus:outline-none"  />
             </div>
             <div class="mb-4">
               <label for="address" class="block text-[var(--secondary-color)]">ที่อยู่</label>
@@ -286,7 +278,7 @@
             </div>
             <div class="mb-4">
               <label for="note" class="block text-[var(--secondary-color)]">หมายเหตุ:</label>
-              <textarea id="note" placeholder="โปรดระบุในกรณีสั่งซื้อสินค้าขนาดพิเศษหรือสินค้าที่มีการระบุชื่อ" class="block w-full mb-2 p-2 border rounded-xl focus:outline-none" style="height: 100px;"></textarea>
+              <textarea id="note" placeholder="ความเห็นเพิ่มเติม" class="block w-full mb-2 p-2 border rounded-xl focus:outline-none" style="height: 100px;"></textarea>
             </div>
             <div class="mb-4 flex items-center">
               <input type="checkbox" id="save-info" class="mr-2">
@@ -372,7 +364,7 @@
 
     async function initializeApp() {
       showLoading(true);
-      await initializeLiff();
+      //await initializeLiff();
       try {
         const [productsData, shippingData, bannersData] = await Promise.all([
           fetchProducts(),
@@ -611,12 +603,12 @@
 
     function getCategoryImage(category, products) {
       if (category === 'All') {
-        return 'https://lh5.googleusercontent.com/d/1EcQBRvMKn5oAhRM6yODkn0gWcMTWGGS6';
+        return 'https://img.icons8.com/?size=100&id=aEUiCprmQXz9&format=png&color=000000';
       }
       const product = products.find(function (p) {
         return p.category === category;
       });
-      return product ? product['Img-product'] : 'https://lh5.googleusercontent.com/d/1EcQBRvMKn5oAhRM6yODkn0gWcMTWGGS6';
+      return product ? product['Img-product'] : 'https://img.icons8.com/?size=100&id=aEUiCprmQXz9&format=png&color=000000';
     }
 
     function switchTab(category) {
@@ -782,7 +774,7 @@
             rowContainer.appendChild(sizeSelect);  
 
       const addToCartBtn = document.createElement('button');
-      addToCartBtn.classList.add('bg-[var(--accent-color)]', 'p-2', 'rounded-xl', 'font-bold', 'focus:outline-none', 'focus:ring-2', 'add-to-cart');
+      addToCartBtn.classList.add('bg-[var(--accent-color)]', 'p-2','text-[var(--white-color)]',  'rounded-xl', 'font-bold', 'focus:outline-none', 'focus:ring-2', 'add-to-cart');
       addToCartBtn.style.width = '35%';
       addToCartBtn.textContent = 'ซื้อ';
       addToCartBtn.setAttribute('data-id', product.id);
@@ -1199,7 +1191,7 @@
           <p class="text-md font-semibold mb-2">ชื่อ: ${order.username}</p>
           <p class="text-md font-semibold mb-2">ที่อยู่จัดส่ง: ${order.address}</p>
           <p class="text-md font-semibold mb-2">เบอร์ติดต่อ: ${order.contact}</p>
-          <p class="text-md font-semibold mb-2">เลขรหัสประชาชน: ${order.citizenid}</p>
+          <p class="text-md font-semibold mb-2">อีเมล: ${order.citizenid}</p>
           <div class="border-t mt-4 pt-4">
             ${itemsHtml}
             ${shippingHtml}
