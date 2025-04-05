@@ -741,44 +741,45 @@
       rowContainer.classList.add('flex', 'items-center', 'justify-between');
 
       const sizeSelect = document.createElement('select');
-      sizeSelect.classList.add('bg-gray-200', 'text-[var(--secondary-color)]', 'rounded-xl', 'p-2', 'product-size');
-      sizeSelect.setAttribute('data-id', product.id);
+            sizeSelect.classList.add('bg-gray-200', 'text-[var(--secondary-color)]', 'rounded-xl', 'p-2', 'product-size');
+            sizeSelect.setAttribute('data-id', product.id);
+            // const defaultOption = document.createElement('option');
+            // defaultOption.value = '';
+            // defaultOption.disabled = true;
+            // defaultOption.selected = true;
+            // defaultOption.textContent = 'เลือกไซต์';
+            // sizeSelect.appendChild(defaultOption);
 
-      let firstOptionSelected = false;
-        ['กล่อง', 'แผง', 'ขวด'].forEach(function (size) {
-            if (product[size] > 0) {
-                const option = document.createElement('option');
-                option.value = size;
-                option.textContent = size + ' (' + product[size] + ')';
-                if (!firstOptionSelected) {
-                    option.selected = true;
-                    firstOptionSelected = true;
+            // ['กล่อง', 'แผง', 'ขวด'].forEach(function (size) {
+            //     if (product[size] > 0) {
+            //         const option = document.createElement('option');
+            //         option.value = size;
+            //         option.textContent = size + ' (' + product[size] + ')';
+            //         sizeSelect.appendChild(option);
+            //     }
+            // });
+
+            let firstOptionSelected = false;
+            ['กล่อง', 'แผง', 'ขวด'].forEach(function (size) {
+                if (product[size] > 0) {
+                    const option = document.createElement('option');
+                    option.value = size;
+                    option.textContent = size + ' (' + product[size] + ')';
+                    if (!firstOptionSelected) {
+                        option.selected = true;
+                        firstOptionSelected = true;
+                    }
+                    sizeSelect.appendChild(option);
                 }
-                sizeSelect.appendChild(option);
-            }
-        });
+            });
 
-      // const defaultOption = document.createElement('option');
-      // defaultOption.value = '';
-      // defaultOption.disabled = true;
-      // defaultOption.selected = true;
-      // defaultOption.textContent = 'เลือกไซต์';
-      // sizeSelect.appendChild(defaultOption);
 
-      // ['FS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'].forEach(function (size) {
-      //   if (product[size] > 0) {
-      //     const option = document.createElement('option');
-      //     option.value = size;
-      //     option.textContent = size + ' (' + product[size] + ')';
-      //     sizeSelect.appendChild(option);
-      //   }
-      // });
+            // const otherOption = document.createElement('option');
+            // otherOption.value = 'Other';
+            // otherOption.textContent = 'ระบุเอง';
+            // sizeSelect.appendChild(otherOption);
 
-      // const otherOption = document.createElement('option');
-      // otherOption.value = 'Other';
-      // otherOption.textContent = 'ระบุเอง';
-      // sizeSelect.appendChild(otherOption);
-      // rowContainer.appendChild(sizeSelect);
+            rowContainer.appendChild(sizeSelect);  
 
       const addToCartBtn = document.createElement('button');
       addToCartBtn.classList.add('bg-[var(--accent-color)]', 'p-2', 'rounded-xl', 'font-bold', 'focus:outline-none', 'focus:ring-2', 'add-to-cart');
@@ -988,7 +989,7 @@
   function increment(index) {
   const item = cart[index];
   // กำหนดรายการไซส์มาตรฐานที่มีในระบบ
-  const standardSizes = ['FS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
+  const standardSizes = ['กล่อง', 'ขวด', 'แผง'];
   // ถ้าไซส์ที่เลือกไม่ใช่ไซส์มาตรฐาน (คือ custom size)
   if (!standardSizes.includes(item.size)) {
     // เพิ่มจำนวนได้สูงสุด 10 ชิ้นสำหรับไซส์ custom
